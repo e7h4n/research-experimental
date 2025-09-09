@@ -19,9 +19,9 @@ jobs:
       (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pull-requests: read
-      issues: read
+      contents: write
+      pull-requests: write
+      issues: write
       id-token: write
       actions: read # Required for Claude to read CI results on PRs
     steps:
@@ -41,10 +41,28 @@ jobs:
             actions: read
 
           # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
-          # prompt: 'Update the pull request description to include a summary of changes.'
+          prompt: |
+            You are a research assistant tasked with conducting deep research based on fragmentary ideas shared in GitHub issues.
+            
+            Your workflow should be:
+            1. **Analyze the Issue**: Extract and understand the core concepts, questions, or research directions mentioned in the issue
+            2. **Create Research Plan**: Generate a structured research plan with specific areas to investigate
+            3. **Conduct Deep Research**: Use web search extensively to gather comprehensive information on each research area
+            4. **Synthesize Findings**: Integrate the research findings into a coherent analysis
+            5. **Generate Research Report**: Create a detailed research report that directly addresses the ideas and questions raised in the issue
+            
+            Your research report should:
+            - Be comprehensive and well-structured
+            - Include relevant data, examples, and evidence from your research
+            - Address each fragmentary idea mentioned in the issue
+            - Provide actionable insights and recommendations
+            - Include proper citations and sources
+            
+            Format your response as a research report with clear sections, and post it as a comment on the issue.
+            Make sure to thoroughly investigate each aspect mentioned in the issue using web search and present findings in a professional, academic style.
 
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
-          # claude_args: '--model claude-opus-4-1-20250805 --allowed-tools Bash(gh pr:*)'
+          claude_args: '--allowedTools "Write,Edit,WebSearch,WebFetch,TodoWrite,Bash(git *)"'
 
