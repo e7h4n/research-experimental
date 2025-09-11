@@ -50,9 +50,7 @@ jobs:
             - Issue Body: ${{ github.event.issue.body || github.event.comment.issue.body || 'N/A' }}
             - Comment Body: ${{ github.event.comment.body || 'N/A' }}
             
-            First, analyze the above issue/comment content to extract the key topics, questions, and research directions mentioned.
-            
-            Then, read the file claude-prompt.md in the project root and follow those detailed instructions to conduct comprehensive research on the topics identified.
+            Read the file claude-prompt.md in the project root and follow those instructions to conduct research on the topics mentioned above.
 
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
