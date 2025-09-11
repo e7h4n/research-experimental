@@ -32,7 +32,7 @@ jobs:
 
       - name: Read Claude Prompt
         id: read_prompt
-        run: echo "CLAUDE_PROMPT<<EOF" >> $GITHUB_OUTPUT && cat .github/claude-prompt.md >> $GITHUB_OUTPUT && echo "EOF" >> $GITHUB_OUTPUT
+        run: echo "CLAUDE_PROMPT<<EOF" >> $GITHUB_OUTPUT && cat claude-prompt.md >> $GITHUB_OUTPUT && echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Run Claude Code
         id: claude
