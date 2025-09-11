@@ -30,14 +30,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Read Claude Prompt
-        id: read_prompt
-        run: |
-          DELIMITER="CLAUDE_PROMPT_$(date +%s)_END"
-          echo "CLAUDE_PROMPT<<$DELIMITER" >> $GITHUB_OUTPUT
-          cat claude-prompt.md >> $GITHUB_OUTPUT
-          echo "$DELIMITER" >> $GITHUB_OUTPUT
-
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1
@@ -48,8 +40,8 @@ jobs:
           additional_permissions: |
             actions: read
 
-          # Read prompt from external markdown file
-          prompt: ${{ steps.read_prompt.outputs.CLAUDE_PROMPT }}
+          # Let Claude Code read the prompt file directly
+          prompt: "Please read the file claude-prompt.md in the project root and follow those instructions."
 
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
