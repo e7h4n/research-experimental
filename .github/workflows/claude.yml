@@ -65,9 +65,65 @@ jobs:
             - Comment Body: ${{ github.event.comment.body || 'N/A' }}
             
             Read the file claude-prompt.md in the project root and follow those instructions to conduct research on the topics mentioned above.
+            
+            IMPORTANT: Do NOT perform git operations (branching, committing, pushing) or post completion comments. Only focus on creating the research files. The GitHub Actions workflow will handle git operations and status updates automatically.
 
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
-          claude_args: '--allowedTools "Write,Edit,WebSearch,WebFetch,TodoWrite,Bash(git *),Bash(gh *),Bash(rm *),Bash(mkdir *)"'
+          claude_args: '--allowedTools "Write,Edit,WebSearch,WebFetch,TodoWrite,Bash(rm *),Bash(mkdir *)"'
+
+      - name: Check if research files were created
+        id: check_research
+        run: |
+          ISSUE_NUM=${{ github.event.issue.number || github.event.comment.issue.number }}
+          if [ -d "research/issue-${ISSUE_NUM}" ]; then
+            echo "research_created=true" >> $GITHUB_OUTPUT
+            echo "issue_number=${ISSUE_NUM}" >> $GITHUB_OUTPUT
+          else
+            echo "research_created=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create research branch and commit
+        if: steps.check_research.outputs.research_created == 'true'
+        run: |
+          ISSUE_NUM=${{ steps.check_research.outputs.issue_number }}
+          BRANCH_NAME="research/issue-${ISSUE_NUM}"
+          
+          # Configure git
+          git config user.name "claude-research-bot"
+          git config user.email "claude-research-bot@users.noreply.github.com"
+          
+          # Create and switch to research branch
+          git checkout -b "${BRANCH_NAME}"
+          
+          # Add research files
+          git add "research/issue-${ISSUE_NUM}/"
+          
+          # Commit with descriptive message
+          git commit -m "feat: Add research report for issue #${ISSUE_NUM}
+
+          🔬 Generated comprehensive research report
+          📁 Files: research/issue-${ISSUE_NUM}/
+          🤖 Created by Claude Code Research Assistant"
+          
+          # Push to remote
+          git push origin "${BRANCH_NAME}"
+
+      - name: Post completion comment
+        if: steps.check_research.outputs.research_created == 'true'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ steps.check_research.outputs.issue_number }}
+          body: |
+            ✅ **Research completed!**
+            
+            📁 Branch: `research/issue-${{ steps.check_research.outputs.issue_number }}`
+            📄 Main Report: [`research/issue-${{ steps.check_research.outputs.issue_number }}/README.md`](https://github.com/${{ github.repository }}/blob/research/issue-${{ steps.check_research.outputs.issue_number }}/research/issue-${{ steps.check_research.outputs.issue_number }}/README.md)
+            📚 Detailed Reports: Available in [`research/issue-${{ steps.check_research.outputs.issue_number }}/reports/`](https://github.com/${{ github.repository }}/tree/research/issue-${{ steps.check_research.outputs.issue_number }}/research/issue-${{ steps.check_research.outputs.issue_number }}/reports)
+            
+            The research covers all mentioned aspects with detailed analysis and references.
+            Please review and provide feedback.
+          reactions: hooray
 

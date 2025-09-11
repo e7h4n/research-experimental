@@ -64,28 +64,16 @@ research/issue-{issue_number}/
     └── ...
 ```
 
-## Git Workflow
+## Completion
 
-- Create a new branch: `git checkout -b research/issue-{issue_number}`
-- Stage research files: `git add research/issue-{issue_number}/`
-- Commit: `git commit -m "feat: Add research report for issue #{issue_number}"`
-- Push: `git push origin research/issue-{issue_number}`
+Once you have completed creating all research files, your work is done. The GitHub Actions workflow will automatically:
 
-## Issue Comment
+- Create a research branch (`research/issue-{issue_number}`)
+- Commit all research files with a descriptive message
+- Push the branch to the repository
+- Post a completion comment on the issue with links to the research
 
-Post a completion comment on the original issue:
-
-```bash
-# Post the completion comment
-gh issue comment ${{ github.event.issue.number || github.event.comment.issue.number }} --body "✅ **Research completed!**
-
-📁 Branch: \`research/issue-{issue_number}\`
-📄 Main Report: [\`research/issue-{issue_number}/README.md\`](https://github.com/${{ github.repository }}/blob/research/issue-{issue_number}/research/issue-{issue_number}/README.md)
-📚 Detailed Reports: Available in [\`research/issue-{issue_number}/reports/\`](https://github.com/${{ github.repository }}/tree/research/issue-{issue_number}/research/issue-{issue_number}/reports)
-
-The research covers all mentioned aspects with detailed analysis and references.
-Please review and provide feedback."
-```
+Do NOT perform any git operations or post comments yourself - let the workflow handle these final steps.
 
 ## Report Requirements
 
