@@ -96,7 +96,7 @@ graph TD
 ```mermaid
 xychart-beta
     title "主要模型输出Token价格对比 ($/M tokens)"
-    x-axis [Claude, OpenAI, LLaMA, DeepSeek, 中国厂商, Gemini]
+    x-axis [Claude, OpenAI, LLaMA, DeepSeek, "中国厂商", Gemini]
     y-axis "价格 ($)" 0 --> 80
     bar [15, 10, 0.15, 1.68, 0.28, 2.5]
 ```
