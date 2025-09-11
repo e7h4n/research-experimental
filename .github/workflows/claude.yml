@@ -42,9 +42,17 @@ jobs:
 
           # Let Claude Code read the prompt file directly
           prompt: |
-            First, please summarize the GitHub issue that triggered this workflow - extract the key topics, questions, and research directions mentioned.
+            You are responding to a GitHub issue or comment that mentioned @claude.
             
-            Then, read the file claude-prompt.md in the project root and follow those detailed instructions to conduct comprehensive research on the topics identified in this issue.
+            Issue/Comment Context:
+            - Issue Number: ${{ github.event.issue.number || 'N/A' }}
+            - Issue Title: ${{ github.event.issue.title || github.event.comment.issue.title || 'N/A' }}
+            - Issue Body: ${{ github.event.issue.body || github.event.comment.issue.body || 'N/A' }}
+            - Comment Body: ${{ github.event.comment.body || 'N/A' }}
+            
+            First, analyze the above issue/comment content to extract the key topics, questions, and research directions mentioned.
+            
+            Then, read the file claude-prompt.md in the project root and follow those detailed instructions to conduct comprehensive research on the topics identified.
 
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
