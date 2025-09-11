@@ -69,5 +69,5 @@ jobs:
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
-          claude_args: '--allowedTools "Write,Edit,WebSearch,WebFetch,TodoWrite,Bash(git *),Bash(gh *)"'
+          claude_args: '--allowedTools "Write,Edit,WebSearch,WebFetch,TodoWrite,Bash(git *),Bash(gh *),Bash(rm *),Bash(mkdir *)"'
 
