@@ -99,31 +99,22 @@ jobs:
             echo "research_created=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create research branch and commit
+      - name: Commit and push research files
         if: steps.check_research.outputs.research_created == 'true'
-        run: |
-          ISSUE_NUM=${{ steps.check_research.outputs.issue_number }}
-          BRANCH_NAME="research/issue-${ISSUE_NUM}"
-          
-          # Configure git
-          git config user.name "claude-research-bot"
-          git config user.email "claude-research-bot@users.noreply.github.com"
-          
-          # Create and switch to research branch
-          git checkout -b "${BRANCH_NAME}"
-          
-          # Add research files
-          git add "research/issue-${ISSUE_NUM}/"
-          
-          # Commit with descriptive message
-          git commit -m "feat: Add research report for issue #${ISSUE_NUM}
-
-          🔬 Generated comprehensive research report
-          📁 Files: research/issue-${ISSUE_NUM}/
-          🤖 Created by Claude Code Research Assistant"
-          
-          # Push to remote
-          git push origin "${BRANCH_NAME}"
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: |
+            feat: Add research report for issue #${{ steps.check_research.outputs.issue_number }}
+            
+            🔬 Generated comprehensive research report
+            📁 Files: research/issue-${{ steps.check_research.outputs.issue_number }}/
+            🤖 Created by Claude Code Research Assistant
+          file_pattern: 'research/issue-${{ steps.check_research.outputs.issue_number }}/*'
+          commit_user_name: claude-research-bot
+          commit_user_email: claude-research-bot@users.noreply.github.com
+          commit_author: Claude Research Bot <claude-research-bot@users.noreply.github.com>
+          create_branch: true
+          branch: research/issue-${{ steps.check_research.outputs.issue_number }}
 
       - name: Post completion comment
         if: steps.check_research.outputs.research_created == 'true'
