@@ -73,17 +73,23 @@ research/issue-{issue_number}/
 
 ## Issue Comment
 
-Post a brief comment on the original issue:
+Use the GitHub CLI to update the initial status comment with completion details:
 
-```markdown
-Research completed for this issue.
+```bash
+# Get the comment ID of the status comment (it should be the latest comment by the bot)
+COMMENT_ID=$(gh api repos/${{ github.repository }}/issues/${{ github.event.issue.number || github.event.comment.issue.number }}/comments --jq '.[] | select(.body | contains("🔍 **Research in progress**")) | .id' | tail -1)
 
-📁 Branch: `research/issue-{issue_number}`
-📄 Main Report: [`research/issue-{issue_number}/README.md`](link-to-file)
-📚 Detailed Reports: Available in `research/issue-{issue_number}/reports/`
+# Update the comment with completion status
+gh api repos/${{ github.repository }}/issues/comments/$COMMENT_ID \
+  --method PATCH \
+  --field body="✅ **Research completed!**
+
+📁 Branch: \`research/issue-{issue_number}\`
+📄 Main Report: [\`research/issue-{issue_number}/README.md\`](https://github.com/${{ github.repository }}/blob/research/issue-{issue_number}/research/issue-{issue_number}/README.md)
+📚 Detailed Reports: Available in [\`research/issue-{issue_number}/reports/\`](https://github.com/${{ github.repository }}/tree/research/issue-{issue_number}/research/issue-{issue_number}/reports)
 
 The research covers all mentioned aspects with detailed analysis and references.
-Please review and provide feedback.
+Please review and provide feedback."
 ```
 
 ## Report Requirements

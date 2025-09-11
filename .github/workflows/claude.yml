@@ -30,6 +30,26 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Add eyes reaction to indicate work started
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number || github.event.comment.issue.number }}
+          reaction-type: eyes
+
+      - name: Post initial status comment
+        id: status_comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number || github.event.comment.issue.number }}
+          body: |
+            🔍 **Research in progress...**
+            
+            Action: [View workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            
+            I'm analyzing the topics mentioned and conducting comprehensive research. This may take a few minutes.
+
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1
@@ -55,5 +75,5 @@ jobs:
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
-          claude_args: '--allowedTools "Write,Edit,WebSearch,WebFetch,TodoWrite,Bash(git *)"'
+          claude_args: '--allowedTools "Write,Edit,WebSearch,WebFetch,TodoWrite,Bash(git *),Bash(gh *)"'
 
