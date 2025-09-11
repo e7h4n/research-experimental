@@ -125,11 +125,17 @@ jobs:
           body: |
             ✅ **Research completed!**
             
-            📁 Branch: `research/issue-${{ steps.check_research.outputs.issue_number }}`
-            📄 Main Report: [`research/issue-${{ steps.check_research.outputs.issue_number }}/README.md`](https://github.com/${{ github.repository }}/blob/research/issue-${{ steps.check_research.outputs.issue_number }}/research/issue-${{ steps.check_research.outputs.issue_number }}/README.md)
-            📚 Detailed Reports: Available in [`research/issue-${{ steps.check_research.outputs.issue_number }}/reports/`](https://github.com/${{ github.repository }}/tree/research/issue-${{ steps.check_research.outputs.issue_number }}/research/issue-${{ steps.check_research.outputs.issue_number }}/reports)
+            🌿 **View Research Branch**: [`research/issue-${{ steps.check_research.outputs.issue_number }}`](${{ github.server_url }}/${{ github.repository }}/tree/research/issue-${{ steps.check_research.outputs.issue_number }})
+            
+            📄 **Main Report**: [`README.md`](${{ github.server_url }}/${{ github.repository }}/blob/research/issue-${{ steps.check_research.outputs.issue_number }}/research/issue-${{ steps.check_research.outputs.issue_number }}/README.md)
+            📚 **Detailed Reports**: [`reports/`](${{ github.server_url }}/${{ github.repository }}/tree/research/issue-${{ steps.check_research.outputs.issue_number }}/research/issue-${{ steps.check_research.outputs.issue_number }}/reports)
+            
+            **Quick Navigation:**
+            - 🔗 [Browse all research files](${{ github.server_url }}/${{ github.repository }}/tree/research/issue-${{ steps.check_research.outputs.issue_number }}/research/issue-${{ steps.check_research.outputs.issue_number }})
+            - 📊 [Compare with main branch](${{ github.server_url }}/${{ github.repository }}/compare/main...research/issue-${{ steps.check_research.outputs.issue_number }})
+            - 🔄 [Create Pull Request](${{ github.server_url }}/${{ github.repository }}/compare/main...research/issue-${{ steps.check_research.outputs.issue_number }}?expand=1)
             
             The research covers all mentioned aspects with detailed analysis and references.
-            Please review and provide feedback.
+            Please review and provide feedback!
           reactions: hooray
 
