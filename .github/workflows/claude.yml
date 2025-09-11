@@ -28,7 +28,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 1
 
       - name: Get Job ID
@@ -102,7 +101,7 @@ jobs:
 
       - name: Commit and push research files
         if: steps.check_research.outputs.research_created == 'true'
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: |
             feat: Add research report for issue #${{ steps.check_research.outputs.issue_number }}
