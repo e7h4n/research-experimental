@@ -100,3 +100,7 @@ Please review and provide feedback.
 - References should be authoritative and recent
 - Use proper markdown formatting (headers, lists, code blocks, links)
 - Ensure all internal links work correctly before committing
+
+---
+
+**NOW BEGIN YOUR WORK**: Start by analyzing the GitHub issue that triggered this workflow. Read the issue content carefully, extract the key research topics, and immediately begin creating your research plan. Do not just acknowledge these instructions - start working on the research task right away.
