@@ -31,15 +31,6 @@ jobs:
           token: ${{ secrets.PAT }}
           ref: ${{ github.ref }}
 
-      - name: Get Job ID
-        id: get_job_id
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          jobs=$(gh api repos/${{ github.repository }}/actions/runs/${{ github.run_id}}/attempts/${{ github.run_attempt }}/jobs)
-          job_id=$(echo $jobs | jq -r '.jobs[] | select(.runner_name=="${{ runner.name }}") | .id')
-          echo "job_id=$job_id" >> $GITHUB_OUTPUT
-
       - name: Add eyes reaction and post status comment
         id: status_comment
         uses: peter-evans/create-or-update-comment@v4
@@ -49,7 +40,7 @@ jobs:
           body: |
             🔍 **Research in progress...**
             
-            Action: [View workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.get_job_id.outputs.job_id }})
+            Action: [View workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
             
             I'm analyzing the topics mentioned and conducting comprehensive research. This may take a few minutes.
           reactions: eyes
@@ -77,7 +68,9 @@ jobs:
             Progress Tracking Environment Variables:
             - REPOSITORY="${{ github.repository }}"
             - STATUS_COMMENT_ID="${{ steps.status_comment.outputs.comment-id }}"
-            - WORKFLOW_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.get_job_id.outputs.job_id }}"
+            - GITHUB_SERVER_URL="${{ github.server_url }}"
+            - GITHUB_REPOSITORY="${{ github.repository }}"
+            - GITHUB_RUN_ID="${{ github.run_id }}"
             - ISSUE_NUMBER="${{ github.event.issue.number || github.event.comment.issue.number }}"
             
             Read the file claude-prompt.md in the project root and follow those instructions to conduct research on the topics mentioned above.
