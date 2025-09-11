@@ -119,11 +119,7 @@ jobs:
           git add "research/issue-${ISSUE_NUM}/"
           
           # Commit with descriptive message
-          git commit -m "feat: Add research report for issue #${ISSUE_NUM}
-
-🔬 Generated comprehensive research report
-📁 Files: research/issue-${ISSUE_NUM}/
-🤖 Created by Claude Code Research Assistant"
+          git commit -m "feat: Add research report for issue #${ISSUE_NUM}" -m "🔬 Generated comprehensive research report" -m "📁 Files: research/issue-${ISSUE_NUM}/" -m "🤖 Created by Claude Code Research Assistant"
           
           # Set up authentication and push
           git remote set-url origin "https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }}.git"
