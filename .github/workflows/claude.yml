@@ -100,6 +100,15 @@ jobs:
             echo "research_created=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Create research branch
+        if: steps.check_research.outputs.research_created == 'true'
+        uses: peterjgrainger/action-create-branch@v2.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: research/issue-${{ steps.check_research.outputs.issue_number }}
+          sha: ${{ github.sha }}
+
       - name: Commit and push research files
         if: steps.check_research.outputs.research_created == 'true'
         uses: stefanzweifel/git-auto-commit-action@v6
@@ -114,7 +123,6 @@ jobs:
           commit_user_name: claude-research-bot
           commit_user_email: claude-research-bot@users.noreply.github.com
           commit_author: Claude Research Bot <claude-research-bot@users.noreply.github.com>
-          create_branch: true
           branch: research/issue-${{ steps.check_research.outputs.issue_number }}
 
       - name: Post completion comment
