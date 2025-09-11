@@ -41,7 +41,10 @@ jobs:
             actions: read
 
           # Let Claude Code read the prompt file directly
-          prompt: "Please read the file claude-prompt.md in the project root and follow those instructions."
+          prompt: |
+            First, please summarize the GitHub issue that triggered this workflow - extract the key topics, questions, and research directions mentioned.
+            
+            Then, read the file claude-prompt.md in the project root and follow those detailed instructions to conduct comprehensive research on the topics identified in this issue.
 
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
