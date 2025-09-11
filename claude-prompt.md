@@ -60,7 +60,7 @@ gh api repos/$REPOSITORY/issues/comments/$STATUS_COMMENT_ID \
   --method PATCH \
   --field body="🔍 **Research in progress...**
 
-Action: [View workflow run]($WORKFLOW_URL)
+Action: [View workflow run]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)
 
 ## Current Progress:
 [Create a summary of completed ✅, in-progress 🔄, and pending ⏳ tasks]
