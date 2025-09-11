@@ -139,6 +139,28 @@ Do NOT perform any git operations or post comments yourself - let the workflow h
 - Cross-link between reports using relative paths
 - Main README.md should serve as an executive summary with links to detailed reports
 
+### Visual Elements and Data Presentation
+
+When your research includes data comparisons, trends, statistics, or relationships between concepts, **enhance the visual appeal and clarity** by incorporating appropriate diagrams and charts:
+
+- **Use Mermaid diagrams** to visualize data and relationships (see [GitHub Markdown Diagrams and Tables Guide](./github-markdown-guide.md))
+- **Statistical data**: Use XY charts (line/bar), pie charts, or radar charts to present numerical findings
+- **Process flows**: Use flowcharts or sequence diagrams for step-by-step processes
+- **Comparisons**: Use quadrant charts for positioning analysis or comparison matrices
+- **Relationships**: Use entity relationship diagrams, mindmaps, or Sankey diagrams
+- **Timelines**: Use timeline or Gantt charts for historical data or project planning
+- **Tables**: Use well-formatted markdown tables for structured data comparison
+
+**Examples of when to include visualizations:**
+- Market share data → Pie chart
+- Performance trends over time → Line chart  
+- Feature comparisons → Comparison table with visual elements
+- Process workflows → Flowchart or sequence diagram
+- Concept relationships → Mindmap or entity diagram
+- Survey results → Bar chart or radar chart
+
+Remember: A well-placed chart or diagram can convey complex information more effectively than paragraphs of text.
+
 ## Quality Standards
 
 - Each subtask report should be comprehensive and stand-alone
