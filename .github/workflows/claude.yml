@@ -73,6 +73,12 @@ jobs:
             - Issue Body: ${{ github.event.issue.body || github.event.comment.issue.body || 'N/A' }}
             - Comment Body: ${{ github.event.comment.body || 'N/A' }}
             
+            Progress Tracking Environment Variables:
+            - REPOSITORY="${{ github.repository }}"
+            - STATUS_COMMENT_ID="${{ steps.status_comment.outputs.comment-id }}"
+            - WORKFLOW_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ steps.get_job_id.outputs.job_id }}"
+            - ISSUE_NUMBER="${{ github.event.issue.number || github.event.comment.issue.number }}"
+            
             Read the file claude-prompt.md in the project root and follow those instructions to conduct research on the topics mentioned above.
             
             IMPORTANT: Do NOT perform git operations (branching, committing, pushing) or post completion comments. Only focus on creating the research files. The GitHub Actions workflow will handle git operations and status updates automatically.
@@ -80,7 +86,7 @@ jobs:
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
-          claude_args: '--allowedTools "Write,Edit,WebSearch,WebFetch,TodoWrite,Bash(rm *),Bash(mkdir *)"'
+          claude_args: '--allowedTools "Write,Edit,WebSearch,WebFetch,TodoWrite,Bash(rm *),Bash(mkdir *),Bash(gh *)"'
 
       - name: Check if research files were created
         id: check_research

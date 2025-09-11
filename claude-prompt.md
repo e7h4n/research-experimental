@@ -47,7 +47,30 @@ Save the plan as `research/issue-{issue_number}/plan.md` using this format:
 - [How it addresses the user's probable needs]
 ```
 
-Update the plan.md file by checking off completed tasks as you progress
+Update the plan.md file by checking off completed tasks as you progress.
+
+**Real-time Progress Updates:**
+After each significant TodoWrite update (creating plan, completing major tasks), update the GitHub status comment to show current progress:
+
+```bash
+# Create a progress summary from your current todos
+# Example: "✅ Intent analysis complete | 🔄 Deep research in progress | ⏳ Synthesis pending"
+
+gh api repos/$REPOSITORY/issues/comments/$STATUS_COMMENT_ID \
+  --method PATCH \
+  --field body="🔍 **Research in progress...**
+
+Action: [View workflow run]($WORKFLOW_URL)
+
+## Current Progress:
+[Create a summary of completed ✅, in-progress 🔄, and pending ⏳ tasks]
+
+Last updated: $(date -u +'%Y-%m-%d %H:%M UTC')
+
+I'm analyzing the topics mentioned and conducting comprehensive research. This may take a few minutes."
+```
+
+Use the repository, status comment ID, and workflow URL provided in your context. Update the progress section with a clear, emoji-formatted summary of your current todo status.
 
 ## 3. Conduct Deep Research
 
