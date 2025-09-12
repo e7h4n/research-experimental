@@ -72,7 +72,64 @@ I'm analyzing the topics mentioned and conducting comprehensive research. This m
 
 Use the repository, status comment ID, and workflow URL provided in your context. Update the progress section with a clear, emoji-formatted summary of your current todo status.
 
-## 3. Conduct Deep Research
+## 3. Identify Reputable Sources
+
+Before conducting deep research, identify authoritative and credible sources for the domain:
+
+**Source Evaluation Criteria:**
+- **Academic sources**: Peer-reviewed journals, university research papers, .edu domains
+- **Official sources**: Government sites (.gov), official organization websites
+- **Industry leaders**: Recognized companies, research institutions in the field
+- **Recent publications**: Prioritize sources from the last 2-3 years for current topics
+- **Citation frequency**: Sources that are frequently cited by other reputable publications
+
+**Examples of High-Quality Sources by Domain:**
+
+**Financial Data:**
+- Company annual reports (10-K, 10-Q from SEC EDGAR)
+- Official disclosure sites (SEC.gov, investor relations pages)
+- Central banks (Federal Reserve, ECB, Bank of Japan)
+- Financial regulators (FINRA, FCA, ESMA)
+- Bloomberg, Reuters, Financial Times for market data
+
+**Economic & Trade Data:**
+- World Bank Data (data.worldbank.org)
+- UN Comtrade for international trade statistics
+- IMF (International Monetary Fund) reports
+- OECD statistics and reports
+- National statistics offices (BLS, BEA, Eurostat, etc.)
+
+**Industry-Specific Data:**
+- Automotive: OICA, local auto industry associations, IEA for EV data
+- Technology: Gartner, IDC, Statista (with original source verification)
+- Healthcare: WHO, CDC, NIH, medical journals (NEJM, Lancet, JAMA)
+- Energy: IEA, EIA, IRENA for renewable energy
+
+**Academic & Research:**
+- Google Scholar for peer-reviewed papers
+- PubMed for medical research
+- arXiv for preprints in physics, CS, math
+- SSRN for social sciences
+- Nature, Science, Cell for high-impact research
+
+**Market Research:**
+- McKinsey, BCG, Bain reports
+- PwC, Deloitte, EY industry reports
+- Specialized research firms relevant to the domain
+
+**Red flags to avoid:**
+- Blogs without author credentials or citations
+- Sites with excessive ads or promotional content
+- Sources without publication dates
+- Content farms or AI-generated content sites
+- Unverified social media posts
+- Wikipedia as primary source (use its references instead)
+
+**Best Practice:** Always try to trace back to the original data source. If a news article cites a study or report, find and cite the original document.
+
+Document trusted sources in your research notes for consistent reference.
+
+## 4. Conduct Deep Research
 
 Use web search extensively to gather comprehensive information on each research area
 For each subtask in the plan, create a separate report file:
@@ -83,12 +140,20 @@ For each subtask in the plan, create a separate report file:
 
 Each subtask report should include:
 - Detailed findings specific to that research area
+- **CRITICAL**: Every data point, statistic, claim, or fact must have a proper citation
 - Proper citations in markdown format: [Source Title](URL)
 - Key conclusions with references
+- **NO unsupported statements**: If you cannot find a source for a claim, do not include it
 
-## 4. Synthesize Findings
+## 5. Synthesize Findings
 
 Create the main report at `research/issue-{issue_number}/README.md` that directly addresses the inferred research intent.
+
+**CRITICAL ANTI-HALLUCINATION RULE**: 
+- Only include information that has explicit references from your research
+- Every key data point in the final report MUST trace back to a cited source
+- If a conclusion cannot be supported by referenced material, exclude it
+- Use phrases like "According to [Source](URL)..." for all factual claims
 
 Structure the report as follows:
 - **Executive Summary**: Address the user's probable intent and key questions
@@ -105,7 +170,7 @@ For detailed analysis on [specific topic], see [Task 1 Report](./reports/task-1-
 
 **Important**: Ensure the report provides value even if the original issue was just keywords, by addressing the most logical research intent behind those keywords.
 
-## 5. Finalize and Version Control
+## 6. Finalize and Version Control
 
 - Delete the plan.md file (it's only for work tracking, not for submission)
 - Ensure all report files are complete with proper references
@@ -134,8 +199,11 @@ Do NOT perform any git operations or post comments yourself - let the workflow h
 ## Report Requirements
 
 - All reports must be in markdown format
+- **MANDATORY**: Every factual claim, statistic, or data point MUST have an inline citation
 - Key conclusions must include references: According to [Study Name](URL), ...
 - Use markdown formatting for citations: [1], [2] with a References section at the end
+- **Reference density requirement**: Aim for at least one citation per paragraph
+- **Verification rule**: Before including any information, confirm you have a source URL for it
 - Cross-link between reports using relative paths
 - Main README.md should serve as an executive summary with links to detailed reports
 
@@ -165,8 +233,20 @@ Remember: A well-placed chart or diagram can convey complex information more eff
 
 - Each subtask report should be comprehensive and stand-alone
 - References should be authoritative and recent
+- **Data integrity**: Never state numbers, percentages, or specific facts without a source
+- **Hallucination prevention**: If you're uncertain about a fact, either find a source or exclude it
+- **Citation verification**: Each report should have a References section listing all sources
 - Use proper markdown formatting (headers, lists, code blocks, links)
 - Ensure all internal links work correctly before committing
+
+## Anti-Hallucination Checklist
+
+Before finalizing any report, verify:
+- [ ] Every statistic has a source URL
+- [ ] Every factual claim links to a reference
+- [ ] No speculative statements without clear "may", "might", "could" qualifiers
+- [ ] Final synthesis only uses information from cited sources
+- [ ] References section contains all cited URLs
 
 ---
 
