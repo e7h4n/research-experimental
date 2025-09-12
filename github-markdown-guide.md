@@ -24,6 +24,22 @@ xychart-beta
 ```
 ````
 
+**⚠️ Important XY Chart Restrictions:**
+- All x-axis labels must be wrapped in quotes, especially when using CJK characters: `x-axis ["标签1", "标签2"]`
+- Decimal numbers in data arrays may cause parsing errors. Use integers when possible: `bar [1, 2, 3]` instead of `bar [1.2, 2.4, 3.6]`
+- If decimals are necessary, ensure proper syntax validation
+
+**Example with CJK characters:**
+````markdown
+```mermaid
+xychart-beta
+    title "主要股灾恢复至峰值前水平所需时间（年）"
+    x-axis ["2020新冠", "1962肯尼迪", "1987黑一", "1990储贷", "1970股灾", "1966信贷", "1946战后", "1937衰退", "2008金融", "1973石油", "2000互联网", "1929大萧条"]
+    y-axis "恢复年数" 0 --> 25
+    bar [1, 1, 2, 2, 2, 2, 3, 4, 6, 6, 15, 25]
+```
+````
+
 **Pie Chart**:
 ````markdown
 ```mermaid
@@ -269,6 +285,20 @@ Create interactive 3D models directly in markdown.
 - Pull requests
 - Wikis
 - Markdown files
+
+**Common Rendering Issues and Solutions:**
+
+1. **CJK Character Issues**: Always wrap text containing Chinese, Japanese, or Korean characters in quotes
+   - ✅ Correct: `x-axis ["中文", "日本語", "한국어"]`
+   - ❌ Incorrect: `x-axis [中文, 日本語, 한국어]`
+
+2. **Decimal Number Parsing**: GitHub's Mermaid parser may have issues with decimal numbers
+   - ✅ Safer: Use integers when possible
+   - ⚠️ If decimals needed: Test thoroughly and consider rounding
+
+3. **Syntax Validation**: Always preview diagrams before publishing
+   - Use GitHub's preview feature
+   - Check for parsing errors in the rendered output
 
 **Note**: You may observe errors if you run a third-party Mermaid plugin when using Mermaid syntax on GitHub.
 
